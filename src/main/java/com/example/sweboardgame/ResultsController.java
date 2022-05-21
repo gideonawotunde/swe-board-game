@@ -6,10 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class ResultsController {
 
@@ -37,9 +40,26 @@ public class ResultsController {
     StageController.setScene("pregame-form");
   }
 
-  public void setPlayerNames(Player player1, Player player2, Integer currentPlayer, String dateStarted) throws IOException {
+  public void initResults(Player player1, Player player2, Integer currentPlayer, String dateStarted) throws IOException {
     this.player1 = player1;
     this.player2 = player2;
+
+
+    File file = new File("results.json");
+
+
+    System.out.println(file.exists());
+    JSONArray jsonArray = new JSONArray();
+
+    if (file.exists()) {
+      JSONParser jsonParser = new JSONParser();
+      try (FileReader fileReader = new FileReader("results.json")) {
+        Object obj = jsonParser.parse(fileReader);
+        jsonArray = (JSONArray) obj;
+      } catch (ParseException e) {
+        throw new RuntimeException(e);
+      }
+    }
 
     String player1Name = player1.getName();
     String player2Name = player2.getName();
@@ -61,12 +81,11 @@ public class ResultsController {
     gameResult.put("winner", winnerName);
     gameResult.put("date_started", dateStarted);
 
-    JSONArray employeeList = new JSONArray();
-    employeeList.add(gameResult);
+    jsonArray.add(gameResult);
 
-    try (FileWriter file = new FileWriter("results.json")) {
-      file.write(employeeList.toJSONString());
-      file.flush();
+    try (FileWriter fileWriter = new FileWriter("results.json")) {
+      fileWriter.write(jsonArray.toJSONString());
+      fileWriter.flush();
 
     } catch (IOException e) {
       e.printStackTrace();

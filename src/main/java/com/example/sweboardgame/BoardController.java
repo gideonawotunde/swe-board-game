@@ -23,7 +23,7 @@ public class BoardController {
   private String dateStarted;
 
   public void initializeGame(Player player1, Player player2) {
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     LocalDateTime now = LocalDateTime.now();
 
     this.player1 = player1;
@@ -81,7 +81,7 @@ public class BoardController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("results.fxml"));
         Parent root = fxmlLoader.load();
         ResultsController results = fxmlLoader.getController();
-        results.setPlayerNames(player1, player2, currentPlayer, dateStarted);
+        results.initResults(player1, player2, currentPlayer, dateStarted);
 
         StageController.setScene(root);
       } catch (IOException e) {
