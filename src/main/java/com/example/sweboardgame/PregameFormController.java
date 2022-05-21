@@ -20,6 +20,6 @@ public class PregameFormController {
       return;
     }
 
-    System.out.println("Start game");
+    StageController.setScene("board");
   }
 }
