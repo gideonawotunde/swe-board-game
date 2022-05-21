@@ -3,7 +3,6 @@ package com.example.sweboardgame;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -11,7 +10,7 @@ import javafx.scene.layout.StackPane;
 import java.util.Objects;
 
 public class BoardController {
-  private Integer currentPlayer = 1;
+  private static Integer currentPlayer = 1;
 
   @FXML
   public GridPane board;
@@ -20,7 +19,7 @@ public class BoardController {
   private void initialize() {
     for (var i = 0; i < board.getRowCount(); i++) {
       for (var j = 0; j < board.getColumnCount(); j++) {
-        var square = createSquare();
+        StackPane square = createSquare();
         board.add(square, j, i);
       }
     }
@@ -57,14 +56,14 @@ public class BoardController {
     fillVerticalCells(cellBelow, col);
     fillVerticalCells(row, colLeft);
     fillVerticalCells(row, colRight);
-    setCurrentPlayer(currentPlayer == 1 ? 2 : 1);
     Integer numberOfEmptyCells = getNumberOfEmptyCells();
 
     if (numberOfEmptyCells == 0) {
-      System.out.println("Game over");
+      StageController.setScene("results");
+      return;
     }
 
-    System.out.println(numberOfEmptyCells);
+    setCurrentPlayer(currentPlayer == 1 ? 2 : 1);
   }
 
   public void fillVerticalCells(Integer row, Integer col) {
@@ -105,12 +104,12 @@ public class BoardController {
     return totalCells;
   }
 
-  public Integer getCurrentPlayer() {
+  public static Integer getCurrentPlayer() {
     return currentPlayer;
   }
 
   public void setCurrentPlayer(Integer currentPlayer) {
-    this.currentPlayer = currentPlayer;
+    BoardController.currentPlayer = currentPlayer;
   }
 
   public Shape.ShapeType getShape() {

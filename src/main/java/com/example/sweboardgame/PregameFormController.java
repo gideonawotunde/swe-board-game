@@ -22,4 +22,12 @@ public class PregameFormController {
 
     StageController.setScene("board");
   }
+
+  public TextField getPlayer1() {
+    return player1;
+  }
+
+  public TextField getPlayer2() {
+    return player2;
+  }
 }
