@@ -3,15 +3,16 @@ package com.example.sweboardgame;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.util.Objects;
 
 public class BoardController {
+  private Integer currentPlayer = 1;
+
   @FXML
   public GridPane board;
 
@@ -33,18 +34,17 @@ public class BoardController {
     return square;
   }
 
-  private Circle create0Shape() {
-    Circle circle = new Circle(30);
-    circle.setFill(Color.TRANSPARENT);
-
-    return circle;
-  }
-
-
   @FXML
   private void handleMouseClick(MouseEvent event) {
     StackPane selectedSquare = (StackPane) event.getSource();
-    selectedSquare.getChildren().add(new Shape(Shape.Shapes.X));
+    int numberOfChildNodes = selectedSquare.getChildren().size();
+
+    if (numberOfChildNodes > 0) {
+      System.out.println("Invalid move");
+      return;
+    }
+
+    selectedSquare.getChildren().add(new Shape(getShape()));
 
     Integer row = GridPane.getRowIndex(selectedSquare);
     Integer col = GridPane.getColumnIndex(selectedSquare);
@@ -57,18 +57,23 @@ public class BoardController {
     fillVerticalCells(cellBelow, col);
     fillVerticalCells(row, colLeft);
     fillVerticalCells(row, colRight);
+    setCurrentPlayer(currentPlayer == 1 ? 2 : 1);
+    Integer numberOfEmptyCells = getNumberOfEmptyCells();
 
-    //    System.out.printf("Click on square (%d,%d)%n", row, col);
+    if (numberOfEmptyCells == 0) {
+      System.out.println("Game over");
+    }
+
+    System.out.println(numberOfEmptyCells);
   }
 
   public void fillVerticalCells(Integer row, Integer col) {
     StackPane cell = (StackPane) getNodeByRowColumnIndex(row, col);
 
-    if (cell != null) {
-      cell.getChildren().add(new Shape(Shape.Shapes.X));
+    if (cell != null && cell.getChildren().size() < 1) {
+      cell.getChildren().add(new Shape(getShape()));
     }
   }
-
 
   public Node getNodeByRowColumnIndex(final Integer row, final Integer column) {
     Node result = null;
@@ -83,4 +88,33 @@ public class BoardController {
 
     return result;
   }
+
+  public Integer getNumberOfEmptyCells() {
+    int totalCells = board.getRowCount() * board.getColumnCount();
+
+    for (var i = 0; i < board.getRowCount(); i++) {
+      for (var j = 0; j < board.getColumnCount(); j++) {
+        StackPane node = (StackPane) getNodeByRowColumnIndex(i, j);
+        int integer = node.getChildren().size();
+        if (integer > 0) {
+          totalCells = totalCells - 1;
+        }
+      }
+    }
+
+    return totalCells;
+  }
+
+  public Integer getCurrentPlayer() {
+    return currentPlayer;
+  }
+
+  public void setCurrentPlayer(Integer currentPlayer) {
+    this.currentPlayer = currentPlayer;
+  }
+
+  public Shape.ShapeType getShape() {
+    return getCurrentPlayer() == 1 ? Shape.ShapeType.X : Shape.ShapeType.O;
+  }
+
 }

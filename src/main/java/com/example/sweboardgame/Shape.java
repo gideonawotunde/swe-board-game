@@ -6,12 +6,12 @@ import javafx.scene.text.Font;
 
 
 public class Shape extends Label {
-  public enum Shapes {
+  public enum ShapeType {
     X,
     O
   }
 
-  public Shape(Shapes shape) {
+  public Shape(ShapeType shape) {
     super(shape.toString());
 
     setFont(Font.font(Font.getDefault().getFamily(), 70));
