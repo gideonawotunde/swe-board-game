@@ -29,15 +29,23 @@ public class BoardController {
     StackPane square = new StackPane();
     square.getStyleClass().add("square");
     square.setOnMouseClicked(this::handleMouseClick);
-    Circle piece = new Circle(30);
-    piece.setFill(Color.TRANSPARENT);
-    square.getChildren().add(piece);
+
     return square;
   }
+
+  private Circle create0Shape() {
+    Circle circle = new Circle(30);
+    circle.setFill(Color.TRANSPARENT);
+
+    return circle;
+  }
+
 
   @FXML
   private void handleMouseClick(MouseEvent event) {
     StackPane selectedSquare = (StackPane) event.getSource();
+    selectedSquare.getChildren().add(new Shape(Shape.Shapes.X));
+
     Integer row = GridPane.getRowIndex(selectedSquare);
     Integer col = GridPane.getColumnIndex(selectedSquare);
     Integer colLeft = col - 1;
@@ -50,23 +58,19 @@ public class BoardController {
     fillVerticalCells(row, colLeft);
     fillVerticalCells(row, colRight);
 
-    Circle selectedCoin = (Circle) selectedSquare.getChildren().get(0);
-    selectedCoin.setFill(Color.web("red"));
-
-//    System.out.printf("Click on square (%d,%d)%n", row, col);
+    //    System.out.printf("Click on square (%d,%d)%n", row, col);
   }
 
   public void fillVerticalCells(Integer row, Integer col) {
     StackPane cell = (StackPane) getNodeByRowColumnIndex(row, col);
 
     if (cell != null) {
-      Circle coin = (Circle) cell.getChildren().get(0);
-      coin.setFill(Color.web("red"));
+      cell.getChildren().add(new Shape(Shape.Shapes.X));
     }
   }
 
 
-  public Node getNodeByRowColumnIndex (final Integer row, final Integer column) {
+  public Node getNodeByRowColumnIndex(final Integer row, final Integer column) {
     Node result = null;
     ObservableList<Node> children = board.getChildren();
 
