@@ -2,15 +2,26 @@ package com.example.sweboardgame;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class BoardController {
-  private static Integer currentPlayer = 1;
+  private String player1Name;
+  private String player2Name;
+  private Integer currentPlayer;
+
+  public void initializeGame(String player1Name, String player2Name) {
+    this.player1Name = player1Name;
+    this.player2Name = player2Name;
+    this.currentPlayer = 1;
+  }
 
   @FXML
   public GridPane board;
@@ -56,10 +67,20 @@ public class BoardController {
     fillVerticalCells(cellBelow, col);
     fillVerticalCells(row, colLeft);
     fillVerticalCells(row, colRight);
+
     Integer numberOfEmptyCells = getNumberOfEmptyCells();
 
     if (numberOfEmptyCells == 0) {
-      StageController.setScene("results");
+      try {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("results.fxml"));
+        Parent root = fxmlLoader.load();
+        Results results = fxmlLoader.getController();
+        results.setPlayerNames(player1Name, player2Name, currentPlayer);
+
+        StageController.setScene(root);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
       return;
     }
 
@@ -104,16 +125,12 @@ public class BoardController {
     return totalCells;
   }
 
-  public static Integer getCurrentPlayer() {
-    return currentPlayer;
-  }
-
   public void setCurrentPlayer(Integer currentPlayer) {
-    BoardController.currentPlayer = currentPlayer;
+    this.currentPlayer = currentPlayer;
   }
 
   public Shape.ShapeType getShape() {
-    return getCurrentPlayer() == 1 ? Shape.ShapeType.X : Shape.ShapeType.O;
+    return currentPlayer == 1 ? Shape.ShapeType.X : Shape.ShapeType.O;
   }
 
 }

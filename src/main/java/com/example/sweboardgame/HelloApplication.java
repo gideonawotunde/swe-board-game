@@ -10,7 +10,7 @@ public class HelloApplication extends Application {
   public void start(Stage stage) {
     HelloApplication.stage = stage;
 
-    StageController.setScene("board");
+    StageController.setScene("pregame-form");
   }
 
   public static void main(String[] args) {
