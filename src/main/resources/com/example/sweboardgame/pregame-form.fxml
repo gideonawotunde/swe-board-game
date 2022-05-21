@@ -6,35 +6,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sweboardgame.PregameFormController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18"
+            fx:controller="com.example.sweboardgame.PregameFormController">
     <children>
-        <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
             <children>
-            <VBox alignment="CENTER" maxWidth="300.0" spacing="20.0">
-               <children>
-                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player names">
-                          <font>
-                              <Font name="System Bold" size="25.0" />
-                          </font>
-                          <VBox.margin>
-                              <Insets bottom="10.0" />
-                          </VBox.margin>
-                      </Text>
-                      <VBox prefWidth="100.0" spacing="10.0" VBox.vgrow="NEVER">
-                          <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" />
-                              <TextField fx:id="player1" promptText="Jane" VBox.vgrow="NEVER" />
-                          </children>
-                      </VBox>
-                      <VBox prefWidth="100.0" spacing="10.0">
-                          <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" />
-                              <TextField fx:id="player2" promptText="John" />
-                          </children>
-                      </VBox>
-                      <Button mnemonicParsing="false" onAction="#onStartButtonClick" text="Start game" />
-               </children>
-            </VBox>
+                <VBox alignment="CENTER" maxWidth="300.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player names">
+                            <font>
+                                <Font name="System Bold" size="25.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="10.0"/>
+                            </VBox.margin>
+                        </Text>
+                        <VBox prefWidth="100.0" spacing="10.0" VBox.vgrow="NEVER">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1"/>
+                                <TextField fx:id="player1" promptText="Jane" VBox.vgrow="NEVER"/>
+                            </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" spacing="10.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2"/>
+                                <TextField fx:id="player2" promptText="John"/>
+                            </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#onStartButtonClick" text="Start game"/>
+                    </children>
+                </VBox>
             </children>
         </VBox>
     </children>

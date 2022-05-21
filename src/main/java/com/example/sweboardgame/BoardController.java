@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class BoardController {
+  @FXML
+  public GridPane board;
   private String player1Name;
   private String player2Name;
   private Integer currentPlayer;
@@ -22,9 +24,6 @@ public class BoardController {
     this.player2Name = player2Name;
     this.currentPlayer = 1;
   }
-
-  @FXML
-  public GridPane board;
 
   @FXML
   private void initialize() {

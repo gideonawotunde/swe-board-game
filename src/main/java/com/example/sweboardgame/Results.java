@@ -8,11 +8,10 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class Results {
-  private String player1Name;
-  private String player2Name;
-
   @FXML
   Label winner;
+  private String player1Name;
+  private String player2Name;
 
   @FXML
   protected void onRestartButtonClick() {
