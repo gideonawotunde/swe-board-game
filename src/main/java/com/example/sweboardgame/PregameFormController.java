@@ -17,6 +17,8 @@ public class PregameFormController {
   protected void onStartButtonClick() throws IOException {
     String player1Name = player1.getText();
     String player2Name = player2.getText();
+    Player player1 = new Player(player1Name, 0);
+    Player player2 = new Player(player2Name, 0);
     Boolean player1IsInvalid = player1Name.isEmpty();
     Boolean player2IsInvalid = player2Name.isEmpty();
 
@@ -28,7 +30,7 @@ public class PregameFormController {
     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("board.fxml"));
     Parent root = fxmlLoader.load();
     BoardController boardController = fxmlLoader.getController();
-    boardController.initializeGame(player1Name, player2Name);
+    boardController.initializeGame(player1, player2);
 
     StageController.setScene(root);
   }

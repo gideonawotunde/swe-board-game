@@ -10,19 +10,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class BoardController {
   @FXML
   public GridPane board;
-  private String player1Name;
-  private String player2Name;
+  private Player player1;
+  private Player player2;
   private Integer currentPlayer;
+  private String dateStarted;
 
-  public void initializeGame(String player1Name, String player2Name) {
-    this.player1Name = player1Name;
-    this.player2Name = player2Name;
+  public void initializeGame(Player player1, Player player2) {
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    LocalDateTime now = LocalDateTime.now();
+
+    this.player1 = player1;
+    this.player2 = player2;
     this.currentPlayer = 1;
+    this.dateStarted = dtf.format(now);
   }
 
   @FXML
@@ -73,8 +80,8 @@ public class BoardController {
       try {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("results.fxml"));
         Parent root = fxmlLoader.load();
-        Results results = fxmlLoader.getController();
-        results.setPlayerNames(player1Name, player2Name, currentPlayer);
+        ResultsController results = fxmlLoader.getController();
+        results.setPlayerNames(player1, player2, currentPlayer, dateStarted);
 
         StageController.setScene(root);
       } catch (IOException e) {
@@ -84,6 +91,12 @@ public class BoardController {
     }
 
     setCurrentPlayer(currentPlayer == 1 ? 2 : 1);
+
+    if (currentPlayer == 1) {
+      player1.setNumberOfTurns(player1.getNumberOfTurns() + 1);
+    } else {
+      player2.setNumberOfTurns(player2.getNumberOfTurns() + 1);
+    }
   }
 
   public void fillVerticalCells(Integer row, Integer col) {
