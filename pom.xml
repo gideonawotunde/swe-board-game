@@ -12,7 +12,6 @@
     <properties>
         <groupId>com.example</groupId>
         <artifactId>swe-board-game</artifactId>
-        <version>1.0</version>
         <description>This project is a board game between two players. Players move in turns. In a move, a player
             must choose an empty cell and write their symbol. The program would automatically fill the neighbouring cells (top, bottom, left, right)
             if they are empty thereby forming a plus. The last player to play is the winner. The program also shows a highscore table.
@@ -27,8 +26,10 @@
             </developer>
         </developers>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.8.2</junit.version>
         <exec.mainClass>HelloApplication</exec.mainClass>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.8.2</junit.version>
     </properties>
 
     <dependencies>
