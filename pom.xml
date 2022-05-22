@@ -10,8 +10,25 @@
     <name>swe-board-game</name>
 
     <properties>
+        <groupId>com.example</groupId>
+        <artifactId>swe-board-game</artifactId>
+        <version>1.0</version>
+        <description>This project is a board game between two players. Players move in turns. In a move, a player
+            must choose an empty cell and write their symbol. The program would automatically fill the neighbouring cells (top, bottom, left, right)
+            if they are empty thereby forming a plus. The last player to play is the winner. The program also shows a highscore table.
+        </description>
+        <developers>
+            <developer>
+                <id>YJNUMT</id>
+                <name>Awotunde Gideon Oyetunji</name>
+                <email>gideonawotunde14@gmail.com</email>
+                <organization>Faculty of Informatics, University of Debrecen</organization>
+                <organizationUrl>https://www.inf.unideb.hu/</organizationUrl>
+            </developer>
+        </developers>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
+        <exec.mainClass>HelloApplication</exec.mainClass>
     </properties>
 
     <dependencies>
