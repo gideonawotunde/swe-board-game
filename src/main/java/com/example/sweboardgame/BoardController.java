@@ -83,7 +83,7 @@ public class BoardController {
         ResultsController results = fxmlLoader.getController();
         results.initResults(player1, player2, currentPlayer, dateStarted);
 
-        StageController.setScene(root);
+        StageController.setScene(root, "Results");
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

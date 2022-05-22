@@ -14,6 +14,11 @@ public class PregameFormController {
   public TextField player2;
 
   @FXML
+  protected void onHighScoreButtonClick() {
+    StageController.setScene("high-score", "High score");
+  }
+
+  @FXML
   protected void onStartButtonClick() throws IOException {
     String player1Name = player1.getText();
     String player2Name = player2.getText();
@@ -32,6 +37,6 @@ public class PregameFormController {
     BoardController boardController = fxmlLoader.getController();
     boardController.initializeGame(player1, player2);
 
-    StageController.setScene(root);
+    StageController.setScene(root, "Board game");
   }
 }

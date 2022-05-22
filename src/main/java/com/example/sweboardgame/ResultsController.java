@@ -22,6 +22,11 @@ public class ResultsController {
   private Player player2;
 
   @FXML
+  protected void onHighScoreButtonClick() {
+    StageController.setScene("high-score", "High score");
+  }
+
+  @FXML
   protected void onRestartButtonClick() {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("board.fxml"));
@@ -29,7 +34,7 @@ public class ResultsController {
       BoardController boardController = fxmlLoader.getController();
       boardController.initializeGame(player1, player2);
 
-      StageController.setScene(root);
+      StageController.setScene(root, "Board game");
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -37,23 +42,19 @@ public class ResultsController {
 
   @FXML
   protected void onNewGameButtonClick() {
-    StageController.setScene("pregame-form");
+    StageController.setScene("pregame-form", "Enter player names");
   }
 
   public void initResults(Player player1, Player player2, Integer currentPlayer, String dateStarted) throws IOException {
     this.player1 = player1;
     this.player2 = player2;
 
-
     File file = new File("results.json");
-
-
-    System.out.println(file.exists());
     JSONArray jsonArray = new JSONArray();
 
     if (file.exists()) {
       JSONParser jsonParser = new JSONParser();
-      try (FileReader fileReader = new FileReader("results.json")) {
+      try (FileReader fileReader = new FileReader(file)) {
         Object obj = jsonParser.parse(fileReader);
         jsonArray = (JSONArray) obj;
       } catch (ParseException e) {

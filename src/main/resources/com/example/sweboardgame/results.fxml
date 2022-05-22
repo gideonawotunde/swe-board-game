@@ -2,28 +2,26 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sweboardgame.ResultsController" alignment="CENTER" maxHeight="-Infinity"
-      maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/18">
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sweboardgame.ResultsController">
     <children>
         <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0">
             <children>
                 <Label text="Game over!">
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Label>
-                <Label fx:id="winner" text="Player 1 wins!"/>
-                <HBox alignment="CENTER" spacing="20.0">
-                    <children>
-                        <Button onAction="#onRestartButtonClick" mnemonicParsing="false" text="Restart"/>
-                        <Button onAction="#onNewGameButtonClick" mnemonicParsing="false" text="Start new game"
-                                HBox.hgrow="NEVER"/>
-                    </children>
-                </HBox>
+                <Label fx:id="winner" text="Player 1 wins!" />
+            <VBox alignment="CENTER" spacing="20.0">
+               <children>
+                        <Button mnemonicParsing="false" onAction="#onRestartButtonClick" text="Restart" />
+                        <Button mnemonicParsing="false" onAction="#onHighScoreButtonClick" text="View high score" />
+                  <Button layoutX="159.0" layoutY="56.0" mnemonicParsing="false" onAction="#onNewGameButtonClick" text="Start new game" />
+               </children>
+            </VBox>
             </children>
         </VBox>
     </children>

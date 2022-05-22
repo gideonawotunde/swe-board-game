@@ -14,6 +14,6 @@ public class HelloApplication extends Application {
   public void start(Stage stage) {
     HelloApplication.stage = stage;
 
-    StageController.setScene("pregame-form");
+    StageController.setScene("pregame-form", "Enter player names");
   }
 }
